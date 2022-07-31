@@ -1,0 +1,47 @@
+
+spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 5
+    driver-class-name: ${DATASOURCE_DRIVER_CLASS_NAME}
+    url: jdbc:${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: ${JPA_DIALECT}
+        show_sql: true
+        temp:
+          use_jdbc_metadata_defaults: false
+  main:
+    allow-bean-definition-overriding: true
+server:
+  port: ${PORT}
+
+
+
+
+
+
+#spring:
+#  datasource:
+#    hikari:
+#      maximum-pool-size: 5
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:${DATABASE_URL}
+#    host: ${HOST}
+#    username: ${DATABASE_USERNAME}
+#    password: ${DATABASE_PASSWORD}
+#  jpa:
+#    properties:
+#      hibernate:
+#        ddl-auto: update
+#        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+#        show_sql: true
+#        temp:
+#          use_jdbc_metadata_defaults: false
+#server:
+#  port: ${PORT}
