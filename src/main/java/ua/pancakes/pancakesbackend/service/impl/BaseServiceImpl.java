@@ -7,7 +7,6 @@ import ua.pancakes.pancakesbackend.service.BaseService;
 
 import java.util.List;
 
-
 public abstract class BaseServiceImpl<T extends BaseEntity>
         implements BaseService<T> {
 
