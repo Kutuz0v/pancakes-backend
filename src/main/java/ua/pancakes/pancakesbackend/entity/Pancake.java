@@ -1,9 +1,6 @@
 package ua.pancakes.pancakesbackend.entity;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.Cascade;
 
@@ -48,16 +45,26 @@ public class Pancake extends BaseEntity{
     @ToString.Exclude
     private Set<Ingredient> ingredients;
 
+    @Builder
+    Pancake(Integer price, Integer weight, Set<Ingredient> ingredients) {
+        this.price = price;
+        this.weight = weight;
+        this.ingredients = ingredients;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Pancake pancake = (Pancake) o;
-        return id != null && Objects.equals(id, pancake.id);
+        if (!(o instanceof Pancake pancake)) return false;
+
+        return Objects.equals(id, pancake.id) &&
+                Objects.equals(price, pancake.price) &&
+                Objects.equals(weight, pancake.weight) &&
+                Objects.equals(ingredients, pancake.ingredients);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(super.hashCode(), price, weight, ingredients);
     }
 }

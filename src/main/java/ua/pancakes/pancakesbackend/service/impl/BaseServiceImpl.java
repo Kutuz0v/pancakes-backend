@@ -43,7 +43,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity>
     public void delete(Long id) {
         if (repository.existsById(id))
             repository.deleteById(id);
-        else throw new RuntimeException("EntityNotFoundException");
+        else throw new RuntimeException("EntityNotFoundException with id " + id);
 
     }
 

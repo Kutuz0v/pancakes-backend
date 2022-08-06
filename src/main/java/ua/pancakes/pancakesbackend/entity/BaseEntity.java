@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.Objects;
 
 @Getter
@@ -14,9 +15,10 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @MappedSuperclass
 @AllArgsConstructor
-public class BaseEntity {
+public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @PositiveOrZero
     protected Long id;
 
     @Override

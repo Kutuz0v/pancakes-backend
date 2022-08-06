@@ -1,10 +1,6 @@
 package ua.pancakes.pancakesbackend.entity;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.Hibernate;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.Positive;
@@ -13,7 +9,7 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @RequiredArgsConstructor
 public class Ingredient extends BaseEntity {
 
@@ -28,17 +24,27 @@ public class Ingredient extends BaseEntity {
     @Positive
     private Integer weight;
 
+    @Builder
+    Ingredient(Long id, String value, Integer price, Integer weight) {
+        super(id);
+        this.value = value;
+        this.price = price;
+        this.weight = weight;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Ingredient that = (Ingredient) o;
-        return id != null && Objects.equals(id, that.id);
+        if (!(o instanceof Ingredient ingredient)) return false;
+
+        return Objects.equals(id, ingredient.id) &&
+                Objects.equals(value, ingredient.value) &&
+                Objects.equals(price, ingredient.price) &&
+                Objects.equals(weight, ingredient.weight);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(super.hashCode(), value, price, weight);
     }
 }

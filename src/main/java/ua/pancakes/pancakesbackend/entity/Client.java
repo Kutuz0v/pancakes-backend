@@ -31,12 +31,10 @@ public class Client extends BaseEntity {
         this.phoneNumber = phoneNumber;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Client client)) return false;
-        //if (!super.equals(o)) return false;
 
         return Objects.equals(id, client.id) &&
                 Objects.equals(name, client.name) &&
@@ -45,9 +43,6 @@ public class Client extends BaseEntity {
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = name == null ? result : result * 31 + name.hashCode();
-        result = phoneNumber == null ? result : result * 31 + phoneNumber.hashCode();
-        return result;
+        return Objects.hash(super.hashCode(), name, phoneNumber);
     }
 }
