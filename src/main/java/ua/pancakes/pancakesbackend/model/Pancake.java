@@ -1,7 +1,6 @@
-package ua.pancakes.pancakesbackend.entity;
+package ua.pancakes.pancakesbackend.model;
 
 import lombok.*;
-import org.hibernate.Hibernate;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.Entity;
@@ -19,13 +18,17 @@ import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Pancake extends BaseEntity{
+public class Pancake extends BaseEntity {
 
-    /** in UAH */
+    /**
+     * in UAH
+     */
     @Positive
     private Integer price;
 
-    /** in grams */
+    /**
+     * in grams
+     */
     @Positive
     private Integer weight;
 
@@ -34,8 +37,8 @@ public class Pancake extends BaseEntity{
     @JoinTable(
             name = "related_ingredients",
             joinColumns = @JoinColumn(
-              name = "pancake_id",
-              referencedColumnName = "id"
+                    name = "pancake_id",
+                    referencedColumnName = "id"
             ),
             inverseJoinColumns = @JoinColumn(
                     name = "ingredient_id",

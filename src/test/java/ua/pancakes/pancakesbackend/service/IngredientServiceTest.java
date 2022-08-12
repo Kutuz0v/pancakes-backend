@@ -1,7 +1,7 @@
 package ua.pancakes.pancakesbackend.service;
 
 import org.springframework.boot.test.context.SpringBootTest;
-import ua.pancakes.pancakesbackend.entity.Ingredient;
+import ua.pancakes.pancakesbackend.model.Ingredient;
 import ua.pancakes.pancakesbackend.repository.IngredientRepository;
 
 @SpringBootTest

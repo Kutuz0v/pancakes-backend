@@ -1,4 +1,4 @@
-package ua.pancakes.pancakesbackend.entity;
+package ua.pancakes.pancakesbackend.model;
 
 import lombok.*;
 
@@ -13,16 +13,22 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class Ingredient extends BaseEntity {
 
-    /** at Ukrainian */
+    /**
+     * at Ukrainian
+     */
     private String value;
 
-    /** in UAH */
-    @Positive
-    private Integer price;
-
-    /** in grams */
+    /**
+     * in grams
+     */
     @Positive
     private Integer weight;
+
+    /**
+     * in UAH
+     */
+    @Positive
+    private Integer price;
 
     @Builder
     Ingredient(Long id, String value, Integer price, Integer weight) {

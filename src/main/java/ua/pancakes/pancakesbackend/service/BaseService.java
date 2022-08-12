@@ -2,7 +2,7 @@ package ua.pancakes.pancakesbackend.service;
 
 
 import org.springframework.validation.annotation.Validated;
-import ua.pancakes.pancakesbackend.entity.BaseEntity;
+import ua.pancakes.pancakesbackend.model.BaseEntity;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;

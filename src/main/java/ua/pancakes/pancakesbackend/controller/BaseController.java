@@ -1,8 +1,9 @@
 package ua.pancakes.pancakesbackend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import ua.pancakes.pancakesbackend.entity.BaseEntity;
+import ua.pancakes.pancakesbackend.model.BaseEntity;
 import ua.pancakes.pancakesbackend.service.BaseService;
 
 import java.util.List;

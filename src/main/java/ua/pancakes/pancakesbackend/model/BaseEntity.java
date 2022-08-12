@@ -1,4 +1,4 @@
-package ua.pancakes.pancakesbackend.entity;
+package ua.pancakes.pancakesbackend.model;
 
 import lombok.*;
 

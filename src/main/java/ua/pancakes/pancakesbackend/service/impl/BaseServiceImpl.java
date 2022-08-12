@@ -1,7 +1,7 @@
 package ua.pancakes.pancakesbackend.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import ua.pancakes.pancakesbackend.entity.BaseEntity;
+import ua.pancakes.pancakesbackend.model.BaseEntity;
 import ua.pancakes.pancakesbackend.repository.BaseRepository;
 import ua.pancakes.pancakesbackend.service.BaseService;
 
