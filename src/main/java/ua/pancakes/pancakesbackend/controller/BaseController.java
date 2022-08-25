@@ -8,7 +8,8 @@ import ua.pancakes.pancakesbackend.service.BaseService;
 
 import java.util.List;
 
-
+//@PreAuthorize("hasAnyAuthority('USER, MODERATOR, ADMINISTRATOR')")
+@PreAuthorize("isAuthenticated()")
 public abstract class BaseController<T extends BaseEntity> {
     @Autowired
     BaseService<T> service;

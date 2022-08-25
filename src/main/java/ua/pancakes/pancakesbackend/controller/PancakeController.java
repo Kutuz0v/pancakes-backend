@@ -1,13 +1,25 @@
 package ua.pancakes.pancakesbackend.controller;
 
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ua.pancakes.pancakesbackend.model.Pancake;
+import ua.pancakes.pancakesbackend.service.PancakeService;
+import ua.pancakes.pancakesbackend.service.security.UserDetailsImpl;
+
+import java.util.List;
 
 @RequestMapping("/pancakes")
 @RestController
-@PreAuthorize("hasAuthority('USER')")
 public class PancakeController extends BaseController<Pancake> {
+    @Autowired
+    PancakeService service;
+//(((UsernamePasswordAuthenticationToken) principal).principal)
+    @Override
+    @GetMapping
+    public List<Pancake> getAll() {
+        return service.getAllForCurrentClient();
+    }
 }

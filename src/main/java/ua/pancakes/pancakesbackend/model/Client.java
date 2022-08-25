@@ -1,5 +1,6 @@
 package ua.pancakes.pancakesbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.Length;
@@ -40,6 +41,7 @@ public class Client extends BaseEntity {
 
     @NotBlank
     @Size(max = 120)
+    @JsonIgnore
     private String password;
 
     @Cascade(SAVE_UPDATE)

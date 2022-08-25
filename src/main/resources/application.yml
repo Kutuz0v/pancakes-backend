@@ -21,7 +21,7 @@ server:
   port: ${PORT}
 
 app:
-    jwtSecret: projectSecretKey
+    jwtSecret: ${jwtSecret}
     jwtExpirationMs: 86400000
 
 

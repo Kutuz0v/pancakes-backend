@@ -1,12 +1,10 @@
 package ua.pancakes.pancakesbackend.model;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.util.Objects;
 import java.util.Set;
@@ -31,6 +29,15 @@ public class Pancake extends BaseEntity {
      */
     @Positive
     private Integer weight;
+
+    @Cascade(SAVE_UPDATE)
+    @ManyToOne()
+    @JoinColumn(
+            name = "client_id",
+            referencedColumnName = "id"
+    )
+    @JsonIncludeProperties("id")
+    private Client client;
 
     @Cascade(SAVE_UPDATE)
     @ManyToMany()
