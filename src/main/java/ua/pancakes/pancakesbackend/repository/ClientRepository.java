@@ -12,4 +12,6 @@ public interface ClientRepository extends BaseRepository<Client, Long> {
     Boolean existsByUsername(String username);
 
     Boolean existsByEmail(String email);
+
+    Optional<Client> findByEmail(String email);
 }
