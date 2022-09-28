@@ -11,7 +11,7 @@ class ClientServiceTest extends BaseServiceTest<Client, ClientRepository> {
     Client getEntityForCreateTest() {
         return Client.builder()
                 .id(NEW_ENTITY_ID)
-                .username("TestCreateName")
+                .firstName("TestCreateFirstName")
                 .email("+380123456789")
                 .build();
     }
@@ -20,7 +20,8 @@ class ClientServiceTest extends BaseServiceTest<Client, ClientRepository> {
     Client getEntityForGetTest() {
         return Client.builder()
                 .id(FIND_ENTITY_BY_ID)
-                .username("TestFindName")
+                .firstName("TestFindFirstName")
+                .lastName("TestFindLastName")
                 .email("+380234567890")
                 .build();
     }
@@ -29,7 +30,8 @@ class ClientServiceTest extends BaseServiceTest<Client, ClientRepository> {
     Client getEntityForUpdateTest() {
         return Client.builder()
                 .id(FIND_ENTITY_BY_ID)
-                .username("TestUpdateName")
+                .firstName("TestUpdateFirstName")
+                .lastName("TestUpdateLastName")
                 .email("+380345678901")
                 .build();
     }
@@ -38,7 +40,8 @@ class ClientServiceTest extends BaseServiceTest<Client, ClientRepository> {
     Client getUpdatedEntityForUpdateTest() {
         return Client.builder()
                 .id(FIND_ENTITY_BY_ID)
-                .username("UpdatedName")
+                .firstName("UpdatedFirstName")
+                .lastName("UpdatedLastName")
                 .email("+380456789012")
                 .build();
     }
@@ -47,7 +50,8 @@ class ClientServiceTest extends BaseServiceTest<Client, ClientRepository> {
     Client getEntityForDeleteTest() {
         return Client.builder()
                 .id(DELETE_ENTITY_ID)
-                .username("TestDeleteName")
+                .firstName("TestDeleteFirstName")
+                .lastName("TestDeleteLastName")
                 .email("+380567890123")
                 .build();
     }

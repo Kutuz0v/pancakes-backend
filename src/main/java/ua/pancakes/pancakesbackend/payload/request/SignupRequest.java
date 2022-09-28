@@ -1,6 +1,8 @@
 package ua.pancakes.pancakesbackend.payload.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Email;
@@ -10,11 +12,11 @@ import java.util.Set;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SignupRequest {
 
-    @NotBlank
-    @Size(min = 3, max = 20)
-    private String username;
+    private String firstName, lastName;
 
     @NotBlank
     @Size(max = 50)

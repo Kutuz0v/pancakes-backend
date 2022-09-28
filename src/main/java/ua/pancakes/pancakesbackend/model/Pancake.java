@@ -1,6 +1,6 @@
 package ua.pancakes.pancakesbackend.model;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
 

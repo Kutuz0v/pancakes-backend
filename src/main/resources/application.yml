@@ -21,7 +21,5 @@ server:
   port: ${PORT}
 
 app:
-    jwtSecret: ${jwtSecret}
-    jwtExpirationMs: 86400000
-
-
+  jwtSecret: ${jwtSecret}
+  jwtExpirationMs: 86400000

@@ -5,10 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -25,13 +22,13 @@ import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 @RequiredArgsConstructor
 public class Client extends BaseEntity {
 
-    @NotBlank(message = "Name cannot be blank")
+    /*@NotBlank(message = "Name cannot be blank")
     @Length(min = 2,
             message = "Name must be at least 2 characters long")
     @Length(max = 50,
             message = "Name cannot be more than 50 characters")
     // TODO: refactor to 2 fields name
-    private String username;
+    private String username;*/
 
     // TODO: validate phoneNumber
     @NotBlank
@@ -44,6 +41,20 @@ public class Client extends BaseEntity {
     @JsonIgnore
     private String password;
 
+    @NotBlank(message = "First name cannot be blank")
+    @Length(min = 2,
+            message = "First name must be at least 2 characters long")
+    @Length(max = 50,
+            message = "First name cannot be more than 50 characters")
+    private String firstName;
+
+    @NotBlank(message = "Last name cannot be blank")
+    @Length(min = 2,
+            message = "Last name must be at least 2 characters long")
+    @Length(max = 50,
+            message = "Last name cannot be more than 50 characters")
+    private String lastName;
+
     @Cascade(SAVE_UPDATE)
     @ManyToMany()
     @JoinTable(name = "client_roles",
@@ -52,10 +63,15 @@ public class Client extends BaseEntity {
     @ToString.Exclude
     private Set<Role> roles = new HashSet<>();
 
+    @OneToMany(mappedBy = "client", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Pancake> pancakes;
+
     @Builder
-    public Client(Long id, String username, String email, String password, Set<Role> roles) {
+    public Client(Long id, String firstName, String lastName, String email, String password, Set<Role> roles) {
         super(id);
-        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.roles = roles;
@@ -67,7 +83,6 @@ public class Client extends BaseEntity {
         if (!(o instanceof Client client)) return false;
 
         return Objects.equals(id, client.id) &&
-                Objects.equals(username, client.username) &&
                 Objects.equals(email, client.email) &&
                 Objects.equals(password, client.password) &&
                 Objects.equals(roles, client.roles);
@@ -75,6 +90,6 @@ public class Client extends BaseEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), username, email, password, roles);
+        return Objects.hash(super.hashCode(), email, password, roles);
     }
 }
