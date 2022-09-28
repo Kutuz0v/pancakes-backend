@@ -8,7 +8,7 @@ public class GoogleAuthenticationUtil {
     private static String GRANT_TYPE = "authorization_code";
     private static String CLIENT_ID = System.getenv("GOOGLE_CLIENT_ID");
     private static String CLIENT_SECRET = System.getenv("GOOGLE_SECRET");
-    private static String REDIRECT_URI = "http://localhost:8080/login";
+    private static String REDIRECT_URI = System.getenv("GOOGLE_REDIRECT_URI");
 
     @Data
     static public class GoogleTokenRequestBody {
