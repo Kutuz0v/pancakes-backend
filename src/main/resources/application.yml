@@ -22,4 +22,5 @@ server:
 
 app:
   jwtSecret: ${jwtSecret}
-  jwtExpirationMs: 86400000
+  jwtExpirationMs: 86400000  # 24 hours
+#  jwtExpirationMs: 30000   # 30 seconds

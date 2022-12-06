@@ -1,10 +1,12 @@
 package ua.pancakes.pancakesbackend.service.impl;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,12 +28,14 @@ import ua.pancakes.pancakesbackend.service.security.UserDetailsImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.InvalidObjectException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class ClientServiceImpl
         extends BaseServiceImpl<Client>
         implements ClientService {
@@ -53,6 +57,45 @@ public class ClientServiceImpl
 
     @Autowired
     HttpServletRequest request;
+
+    @Override
+    public Client update(Long id, Client entity) {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Collection<GrantedAuthority> permittedAuthorities = Set.of(
+                new SimpleGrantedAuthority(ERole.ADMINISTRATOR.name()),
+                new SimpleGrantedAuthority(ERole.MODERATOR.name())
+        );
+
+        boolean requestByPrioritizeUser = userDetails.getAuthorities().stream().anyMatch(permittedAuthorities::contains);
+        if (!requestByPrioritizeUser &&
+                !userDetails.getId().equals(id))
+            throw new RuntimeException("Not Permitted user!");
+
+        Client clientToChange = get(id);
+
+        if (entity.getFirstName() != null && !entity.getFirstName().isBlank())
+            clientToChange.setFirstName(entity.getFirstName());
+
+        if (entity.getLastName() != null && !entity.getLastName().isBlank())
+            clientToChange.setLastName(entity.getLastName());
+
+        if (entity.getEmail() != null && !entity.getEmail().isBlank())
+            clientToChange.setEmail(entity.getEmail());
+
+        if (entity.getPassword() != null && entity.getNewPassword() != null) {
+            boolean authenticated = authenticationManager.authenticate(
+                            new UsernamePasswordAuthenticationToken(
+                                    clientToChange.getEmail(),
+                                    entity.getPassword()))
+                    .isAuthenticated();
+
+            if (authenticated || requestByPrioritizeUser) {
+                clientToChange.setPassword(encoder.encode(entity.getNewPassword()));
+            }
+        }
+
+        return repository.save(clientToChange);
+    }
 
     @Override
     public Client registerUser(SignupRequest signUpRequest) {

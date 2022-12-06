@@ -1,9 +1,12 @@
-package ua.pancakes.pancakesbackend.model;
+package ua.pancakes.pancakesbackend.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+import ua.pancakes.pancakesbackend.model.Pancake;
+import ua.pancakes.pancakesbackend.model.Role;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -15,20 +18,11 @@ import java.util.Set;
 
 import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
-@Entity
 @Getter
 @Setter
 @ToString(callSuper = true)
 @RequiredArgsConstructor
-public class Client extends BaseEntity {
-
-    /*@NotBlank(message = "Name cannot be blank")
-    @Length(min = 2,
-            message = "Name must be at least 2 characters long")
-    @Length(max = 50,
-            message = "Name cannot be more than 50 characters")
-    // TODO: refactor to 2 fields name
-    private String username;*/
+public class ClientDto {
 
     // TODO: validate phoneNumber
     @NotBlank
@@ -38,11 +32,8 @@ public class Client extends BaseEntity {
 
     @NotBlank
     @Size(max = 120)
-    @ToString.Exclude
+    @JsonIgnore
     private String password;
-
-    @Transient
-    private String newPassword;
 
     @NotBlank(message = "First name cannot be blank")
     @Length(min = 2,
@@ -71,8 +62,7 @@ public class Client extends BaseEntity {
     private Set<Pancake> pancakes;
 
     @Builder
-    public Client(Long id, String firstName, String lastName, String email, String password, Set<Role> roles) {
-        super(id);
+    public ClientDto(String firstName, String lastName, String email, String password, Set<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -83,10 +73,9 @@ public class Client extends BaseEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Client client)) return false;
+        if (!(o instanceof ClientDto client)) return false;
 
-        return Objects.equals(id, client.id) &&
-                Objects.equals(email, client.email) &&
+        return Objects.equals(email, client.email) &&
                 Objects.equals(password, client.password) &&
                 Objects.equals(roles, client.roles);
     }

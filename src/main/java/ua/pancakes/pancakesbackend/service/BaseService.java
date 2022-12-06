@@ -17,8 +17,7 @@ public interface BaseService<T extends BaseEntity> {
 
     List<T> getAll();
 
-    T update(@Positive(message = "Id must be positive") Long id,
-             @Valid T client);
+    T update(@Positive(message = "Id must be positive") Long id, T client);
 
     void delete(@Positive(message = "Id must be positive") Long id);
 }
