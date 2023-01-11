@@ -20,9 +20,42 @@ spring:
     allow-bean-definition-overriding: true
 
 server:
+#  port: 5000
   port: ${PORT}
 
 app:
   jwtSecret: ${jwtSecret}
   jwtExpirationMs: 86400000  # 24 hours
 #  jwtExpirationMs: 30000   # 30 seconds
+
+
+
+#spring:
+#  datasource:
+#    hikari:
+#      maximum-pool-size: 5
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://database-1.c4q9dzbythci.eu-central-1.rds.amazonaws.com:5432/pancakes_db
+#    #url: jdbc:${DATABASE_URL}
+#    username: postgres
+#    password: rootroot
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+#        show_sql: true
+#        temp:
+#          use_jdbc_metadata_defaults: false
+#  main:
+#    allow-bean-definition-overriding: true
+#
+#server:
+#  #  port: 5000
+#  port: ${PORT}
+#
+#app:
+#  jwtSecret: sgdfgdfgsdfgdf
+#  jwtExpirationMs: 86400000  # 24 hours
+##  jwtExpirationMs: 30000   # 30 seconds
