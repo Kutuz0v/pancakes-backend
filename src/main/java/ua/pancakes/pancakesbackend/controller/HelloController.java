@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
     @GetMapping
     public String hello() {
-        return "Application is running!";
+        return "Application is running! Since 11.01.2023";
     }
 }
